@@ -45,7 +45,7 @@ module Ember
             end
           end
 
-          unless File.exist? "#{ember_data_source_path}/dist/ember.js"
+          unless File.exist? "#{ember_data_source_path}/dist/ember-data.js"
             FileUtils.cd(ember_data_source_path) do
               system "bundle install"
               system "rm -rf dist"
