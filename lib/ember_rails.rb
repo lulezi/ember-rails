@@ -35,12 +35,14 @@ module Ember
           ember_source_path = ember_source_path[0..-2]
           ember_data_source_path = ember_data_source_path[0..-2]
 
-          FileUtils.cd(ember_source_path) do
-            system "bundle install"
-            system "rm -rf dist"
-            system "bundle exec rake dist"
-            system "pwd"
-            system "ls dist"
+          unless File.exist? "#{ember_source_path}/dist/ember.js" do
+            FileUtils.cd(ember_source_path) do
+              system "bundle install"
+              system "rm -rf dist"
+              system "bundle exec rake dist"
+              system "pwd"
+              system "ls dist"
+            end
           end
 
           FileUtils.cp(::Ember::Source.bundled_path_for("ember#{ext}"), tmp_path.join("ember.js"))
